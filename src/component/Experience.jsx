@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { extend, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-
+import CustomObject from "./CustomObject";
 extend({ OrbitControls });
 
 const Experience = () => {
@@ -22,7 +22,7 @@ const Experience = () => {
       <group ref={groupRef}>
         <mesh
           ref={boxRef}
-          position={[1, 0, 0]}
+          position={[2, 0, 0]}
           rotation-y={Math.PI * 0.25}
           scale={1.5}
         >
@@ -30,7 +30,7 @@ const Experience = () => {
           <meshStandardMaterial color="red" />
         </mesh>
 
-        <mesh position={[-1, 0, 0]}>
+        <mesh position={[-2, 0, 0]}>
           <sphereGeometry />
           <meshStandardMaterial color="cyan" />
         </mesh>
@@ -39,6 +39,7 @@ const Experience = () => {
         <planeGeometry />
         <meshStandardMaterial color="gray" />
       </mesh>
+      <CustomObject />
     </>
   );
 };
