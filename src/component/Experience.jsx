@@ -1,6 +1,8 @@
 import React, { useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import CustomObject from "./CustomObject";
+import { Perf } from "r3f-perf";
+import { button, useControls } from "leva";
 import {
   Html,
   OrbitControls,
@@ -12,6 +14,16 @@ const Experience = () => {
   const boxRef = useRef();
   const groupRef = useRef();
   const { camera, gl } = useThree();
+
+  const { position } = useControls({
+    position: {
+      value: { x: -2, y: 0 },
+      min: -5,
+      max: 5,
+      step: 0.01,
+      joystick: "invertY",
+    },
+  });
 
   useFrame((state, delta) => {
     boxRef.current.rotation.y += delta;
@@ -25,6 +37,8 @@ const Experience = () => {
 
   return (
     <>
+      <Perf position="top-left" />
+
       <OrbitControls makeDefault />
       <directionalLight position={[1, 2, 3]} intensity={1.4} />
       <ambientLight intensity={0.2} />
@@ -32,7 +46,7 @@ const Experience = () => {
         {/* <PivotControls anchor={[0, 0, 0]} scale={3.0} depthTest={false}> */}
         <mesh
           ref={boxRef}
-          position={[2, 0, 0]}
+          position={[position.x, position.y, 0]}
           rotation-y={Math.PI * 0.25}
           scale={1.5}
         >
